@@ -1,8 +1,13 @@
-import { createStore } from "vuex";
+import { reactive, ref } from "vue";
 
-export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+const jsonOutputState = reactive({
+  jsonText: {},
+  jsonUrl: {},
 });
+
+const urlErrorMsg = ref("")
+
+export default {
+  jsonOutputState,
+  urlErrorMsg
+};

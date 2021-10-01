@@ -1,12 +1,12 @@
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+// import { shallowMount } from "@vue/test-utils";
+// import TextareaField from "@/components/TextareaField.vue";
 
-describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg },
-    });
-    expect(wrapper.text()).toMatch(msg);
-  });
-});
+// describe("TextareaField.vue", () => {
+//   it("renders props.msg when passed", () => {
+//     const msg = "new message";
+//     const wrapper = shallowMount(TextareaField, {
+//       props: { msg },
+//     });
+//     expect(wrapper.text()).toMatch(msg);
+//   });
+// });
