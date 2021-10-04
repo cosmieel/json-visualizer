@@ -1,47 +1,37 @@
 <template>
   <form-wrap>
-    <my-input v-focus v-model="inputUrl" class="form__input" />
-    <my-error-msg v-if="errorMsg" class="form__error">
-      {{ errorMsg }}
+    <my-input
+      v-focus
+      v-model="inputUrl"
+      class="form__input"
+      placeholder="Paste link"
+    />
+    <my-error-msg v-if="errorMessage" class="form__error">
+      {{ errorMessage }}
     </my-error-msg>
-    <my-button class="form__btn" @click="visualizeJson" />
+    <my-button class="form__btn" @click="visualize">Visualize</my-button>
   </form-wrap>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, inject } from "vue";
+import { defineComponent } from "vue";
 import FormWrap from "@/components/FormWrap.vue";
+import { useJsonOutputUrl } from "@/hooks/useJsonOutputUrl";
 
 export default defineComponent({
   components: {
     FormWrap,
   },
-  setup(props, { emit }) {
-    const store: any = inject("store");
-    const errorMsg = store.urlErrorMsg;
+  setup() {
+    const { store, inputUrl, errorMessage, visualize } = useJsonOutputUrl();
 
-    const inputUrl = ref("");
-
-    const visualizeJson = async () => {
-      emit("visualize-json", inputUrl.value);
-
-      localStorage.setItem("visualizedurl", inputUrl.value);
-      localStorage.inputUrl = inputUrl.value;
+    return {
+      store,
+      inputUrl,
+      errorMessage,
+      visualize,
     };
-
-    onMounted(() => {
-      if (localStorage.inputUrl) {
-        inputUrl.value = localStorage.inputUrl;
-      }
-    });
-    // watch(inputUrl, (newString, prevString) => {
-    //   localStorage.inputUrl = newString;
-    // });
-
-    return { inputUrl, visualizeJson, errorMsg };
   },
-  emits: ["visualize-json", "error-msg"],
-  props: {},
 });
 </script>
 

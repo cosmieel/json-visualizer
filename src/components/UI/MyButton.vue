@@ -1,5 +1,7 @@
 <template>
-  <button class="my-button" type="button">Visualize</button>
+  <button class="my-button" type="button">
+    <slot></slot>
+  </button>
 </template>
 
 <script lang="ts">
@@ -19,6 +21,11 @@ export default defineComponent({
   cursor: pointer;
   font-size: 20px;
   transition: background 0.2s ease-out;
+
+  &._big {
+    padding: 50px;
+    font-size: 32px;
+  }
 
   &:hover {
     background: #ca7d00;

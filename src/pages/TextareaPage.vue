@@ -1,15 +1,15 @@
 <template>
-  <main>
-    <FormTextarea @visualize-json="visualizeJson" />
-    <Tree :tree-data="jsonText" />
-  </main>
+  <div>
+    <FormTextarea />
+    <Tree :tree-data="output" />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, inject } from "vue";
+import { defineComponent } from "vue";
 import FormTextarea from "@/components/FormTextarea.vue";
 import Tree from "@/components/Tree.vue";
-// import { useJsonTree } from "@/hooks/useJsonTree";
+import { useJsonOutputTextarea } from "@/hooks/useJsonOutputTextarea";
 
 export default defineComponent({
   name: "TextareaPage",
@@ -18,28 +18,11 @@ export default defineComponent({
     Tree,
   },
   setup() {
-    const store: any = inject("store");
-    const jsonText = store.jsonOutputState.jsonText;
-
-    // const { jsonText, visualizeJson } = useJsonTree({});
-
-    // return { jsonText, visualizeJson };
-
-    const visualizeJson = (output: Record<string, unknown>) => {
-      jsonText.value = output;
-    };
-
-    const getLocalStorage = localStorage.getItem("visualized");
-    const cachedJson = JSON.parse(String(getLocalStorage));
-
-    onMounted(() => {
-      if (getLocalStorage) visualizeJson(cachedJson[0]);
-    });
+    const { store, output } = useJsonOutputTextarea();
 
     return {
       store,
-      jsonText,
-      visualizeJson,
+      output,
     };
   },
 });

@@ -12,8 +12,10 @@ export default defineComponent({});
 
 <style lang="scss">
 .form {
+  text-align: center;
+
   &__btn {
-    margin-top: 24px;
+    margin: 24px;
   }
 
   &__error {

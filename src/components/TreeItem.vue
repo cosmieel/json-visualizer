@@ -2,7 +2,9 @@
   <li class="node" v-for="(value, key) in node" :key="key">
     <div class="node__key">{{ key ? key : "'empty'" }}</div>
     <div v-if="!isObject(value)" class="node__value">
-      <span class="node__value-text">{{ value ? value : "'empty'" }}</span>
+      <span class="node__value-text">
+        {{ String(value) ? String(value) : "'empty'" }}
+      </span>
       <span class="node__value-type">{{ typeof value }}</span>
     </div>
 

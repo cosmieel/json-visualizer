@@ -1,52 +1,38 @@
 <template>
   <form-wrap>
-    <my-textarea v-focus v-model="inputText" class="form__textarea" />
+    <my-textarea
+      v-focus
+      v-model="inputText"
+      class="form__textarea"
+      placeholder="Paste JSON"
+    />
     <my-error-msg v-if="errorMessage" class="form__error">
       {{ errorMessage }}
     </my-error-msg>
-    <my-button class="form__btn" @click="visualizeJson" />
+    <my-button class="form__btn" @click="visualize">Visualize</my-button>
   </form-wrap>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent } from "vue";
 import FormWrap from "@/components/FormWrap.vue";
+import { useJsonOutputTextarea } from "@/hooks/useJsonOutputTextarea";
 
 export default defineComponent({
   components: {
     FormWrap,
   },
-  setup(props, { emit }) {
-    const inputText = ref("");
-    const errorMessage = ref("");
+  setup() {
+    const { store, inputText, errorMessage, visualize } =
+      useJsonOutputTextarea();
 
-    const visualizeJson = () => {
-      try {
-        emit("visualize-json", JSON.parse(inputText.value)[0]);
-
-        localStorage.setItem("visualized", inputText.value);
-        localStorage.inputText = inputText.value;
-
-        errorMessage.value = "";
-      } catch (e) {
-        errorMessage.value = e.message;
-        localStorage.removeItem("visualized");
-      }
+    return {
+      store,
+      inputText,
+      errorMessage,
+      visualize,
     };
-
-    onMounted(() => {
-      if (localStorage.inputText) {
-        inputText.value = localStorage.inputText;
-      }
-    });
-    // watch(inputText, (newString, prevString) => {
-    //   localStorage.inputText = newString;
-    // });
-
-    return { inputText, visualizeJson, errorMessage };
   },
-  emits: ["visualize-json"],
-  props: {},
 });
 </script>
 

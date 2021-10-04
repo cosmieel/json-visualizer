@@ -1,9 +1,5 @@
 <template>
-  <div class="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/stringpaste">JSON-string</router-link>
-    <router-link to="/linkpaste">JSON-url</router-link>
-  </div>
+  <Navbar />
   <main class="app">
     <router-view></router-view>
   </main>
@@ -12,8 +8,12 @@
 <script lang="ts">
 import { defineComponent, provide } from "vue";
 import store from "@/store";
+import Navbar from "./components/Navbar.vue";
 
 export default defineComponent({
+  components: {
+    Navbar,
+  },
   setup() {
     provide("store", store);
   },
@@ -21,12 +21,18 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.app {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+}
+
+.app {
+  padding-top: 32px;
+  padding-bottom: 60px;
 }
 body {
   background: #f6fff7;
