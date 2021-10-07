@@ -1,7 +1,7 @@
 import HomePage from "@/pages/HomePage.vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "HomePage",

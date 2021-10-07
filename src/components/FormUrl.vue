@@ -1,5 +1,5 @@
 <template>
-  <form-wrap>
+  <form class="form" @submit.prevent>
     <my-input
       v-focus
       v-model="inputUrl"
@@ -10,18 +10,15 @@
       {{ errorMessage }}
     </my-error-msg>
     <my-button class="form__btn" @click="visualize">Visualize</my-button>
-  </form-wrap>
+  </form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import FormWrap from "@/components/FormWrap.vue";
 import { useJsonOutputUrl } from "@/hooks/useJsonOutputUrl";
 
 export default defineComponent({
-  components: {
-    FormWrap,
-  },
+  name: "FormUrl",
   setup() {
     const { store, inputUrl, errorMessage, visualize } = useJsonOutputUrl();
 

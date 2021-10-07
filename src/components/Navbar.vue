@@ -1,8 +1,18 @@
 <template>
   <nav class="nav">
-    <router-link to="/" class="nav__link">Home</router-link>
-    <router-link to="/stringpaste" class="nav__link">JSON-string</router-link>
-    <router-link to="/linkpaste" class="nav__link">JSON-url</router-link>
+    <router-link to="/" class="nav__link" data-test="route-home">
+      Home
+    </router-link>
+    <router-link
+      to="/stringpaste"
+      class="nav__link"
+      data-test="route-stringpaste"
+    >
+      JSON-string
+    </router-link>
+    <router-link to="/linkpaste" class="nav__link" data-test="route-linkpaste">
+      JSON-url
+    </router-link>
   </nav>
 </template>
 

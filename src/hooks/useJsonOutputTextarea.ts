@@ -1,7 +1,8 @@
 import { inject, toRef, onMounted, watch } from "vue";
+import { Store } from "@/store";
 
 export function useJsonOutputTextarea(): Record<string, unknown> {
-  const store: any = inject("store");
+  const store: Store = inject("store");
   const output = toRef(store.stateTextarea, "jsonOutput");
   const inputText = toRef(store.stateTextarea, "inputText");
   const errorMessage = toRef(store.stateTextarea, "errorMessage");

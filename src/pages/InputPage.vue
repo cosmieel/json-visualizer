@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Visualization by URL</h2>
     <FormUrl />
     <Tree :tree-data="output" />
   </div>

@@ -1,6 +1,9 @@
 import { reactive } from "vue";
 import axios from "axios";
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export type Store = any;
+
 const stateTextarea = reactive({
   jsonOutput: {},
   inputText: "",

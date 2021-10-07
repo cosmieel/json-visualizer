@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Visualization by JSON-string</h2>
     <FormTextarea />
     <Tree :tree-data="output" />
   </div>

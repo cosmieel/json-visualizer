@@ -1,5 +1,5 @@
 <template>
-  <form-wrap>
+  <form class="form" @submit.prevent>
     <my-textarea
       v-focus
       v-model="inputText"
@@ -10,18 +10,15 @@
       {{ errorMessage }}
     </my-error-msg>
     <my-button class="form__btn" @click="visualize">Visualize</my-button>
-  </form-wrap>
+  </form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import FormWrap from "@/components/FormWrap.vue";
 import { useJsonOutputTextarea } from "@/hooks/useJsonOutputTextarea";
 
 export default defineComponent({
-  components: {
-    FormWrap,
-  },
+  name: "FormTextarea",
   setup() {
     const { store, inputText, errorMessage, visualize } =
       useJsonOutputTextarea();
