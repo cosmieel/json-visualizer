@@ -11,8 +11,8 @@ function mountFactory(component) {
   return shallowMount(component, {
     global: {
       provide: {
-        'store': store,
-      }
+        store: store,
+      },
     },
   });
 }
@@ -20,17 +20,16 @@ function formMountFactory() {
   return mount(FormUrl, {
     global: {
       provide: {
-        'store': store,
+        store: store,
       },
       directives: {
-        'focus': VFocus
-      }
+        focus: VFocus,
+      },
     },
   });
 }
 
 describe("InputPage.vue", () => {
-  
   it("renders InputPage", () => {
     const wrapper = mountFactory(InputPage);
 
@@ -41,38 +40,38 @@ describe("InputPage.vue", () => {
 
   it("renders JSON-tree on form button click", async () => {
     const form = formMountFactory();
-    expect(form.find('.form__input').exists()).toBe(true);
-    
-    const input = mount(MyInput)
-    const inputField = input.find<HTMLInputElement>('input')
-    const mockURLString = 'https://jsonplaceholder.typicode.com/users?_limit=1'
-    
-    await inputField.setValue(mockURLString)
-    expect(inputField.element.value).toBe(mockURLString)
+    expect(form.find(".form__input").exists()).toBe(true);
 
-    const tree = mount(Tree)
+    const input = mount(MyInput);
+    const inputField = input.find<HTMLInputElement>("input");
+    const mockURLString = "https://jsonplaceholder.typicode.com/users?_limit=1";
 
-    await form.find('.form__btn').trigger('click')
+    await inputField.setValue(mockURLString);
+    expect(inputField.element.value).toBe(mockURLString);
+
+    const tree = mount(Tree);
+
+    await form.find(".form__btn").trigger("click");
     await flushPromises();
     expect(tree.findComponent(TreeItem).exists()).toBe(true);
-  })
+  });
 
   it("renders error", async () => {
-    const spy = jest.spyOn(store.methodsUrl, 'visualizeJson');
+    const spy = jest.spyOn(store.methodsUrl, "visualizeJson");
     const form = formMountFactory();
-    expect(form.find('.form__input').exists()).toBe(true);
-    
-    const input = mount(MyInput)
-    const inputField = input.find<HTMLInputElement>('input')
-    const mockInvalidURLString = 'asdgasd'
-  
-    await inputField.setValue(mockInvalidURLString)
-    await form.find('.form__btn').trigger('click')
-    await store.methodsUrl.visualizeJson().catch((e) => console.log(e))
+    expect(form.find(".form__input").exists()).toBe(true);
+
+    const input = mount(MyInput);
+    const inputField = input.find<HTMLInputElement>("input");
+    const mockInvalidURLString = "asdgasd";
+
+    await inputField.setValue(mockInvalidURLString);
+    await form.find(".form__btn").trigger("click");
+    await store.methodsUrl.visualizeJson().catch((e) => console.log(e));
     await flushPromises();
 
-    expect(form.find('.form__error').exists()).toBe(true);
-    
+    expect(form.find(".form__error").exists()).toBe(true);
+
     spy.mockRestore();
-  })
+  });
 });

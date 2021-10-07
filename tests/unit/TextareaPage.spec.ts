@@ -1,4 +1,4 @@
-import { shallowMount, flushPromises, mount } from "@vue/test-utils";
+import { shallowMount, mount } from "@vue/test-utils";
 import store from "@/store";
 import VFocus from "@/directives/VFocus";
 import TextareaPage from "@/pages/TextareaPage.vue";
@@ -11,14 +11,13 @@ function mountFactory(component) {
   return shallowMount(component, {
     global: {
       provide: {
-        'store': store,
-      }
+        store: store,
+      },
     },
   });
 }
 
 describe("TextareaPage.vue", () => {
-  
   it("renders TextareaPage", () => {
     const wrapper = mountFactory(TextareaPage);
 
@@ -31,17 +30,17 @@ describe("TextareaPage.vue", () => {
     const form = mount(FormTextarea, {
       global: {
         provide: {
-          'store': store,
+          store: store,
         },
         directives: {
-          'focus': VFocus
-        }
+          focus: VFocus,
+        },
       },
     });
-    expect(form.find('.form__textarea').exists()).toBe(true);
-    
-    const textarea = mount(MyTextarea)
-    const textareaInput = textarea.find<HTMLTextAreaElement>('textarea')
+    expect(form.find(".form__textarea").exists()).toBe(true);
+
+    const textarea = mount(MyTextarea);
+    const textareaInput = textarea.find<HTMLTextAreaElement>("textarea");
     const mockJSONString = `[
       {
         "userId": 1,
@@ -49,39 +48,39 @@ describe("TextareaPage.vue", () => {
         "title": "delectus aut autem",
         "completed": false
       }
-    ]`
-    
-    await textareaInput.setValue(mockJSONString)
-    expect(textareaInput.element.value).toBe(mockJSONString)
+    ]`;
 
-    const tree = mount(Tree)
+    await textareaInput.setValue(mockJSONString);
+    expect(textareaInput.element.value).toBe(mockJSONString);
 
-    await form.find('.form__btn').trigger('click')
+    const tree = mount(Tree);
+
+    await form.find(".form__btn").trigger("click");
     expect(tree.findComponent(TreeItem).exists()).toBe(true);
-  })
+  });
 
   it("renders error", async () => {
     const form = mount(FormTextarea, {
       global: {
         provide: {
-          'store': store,
+          store: store,
         },
         directives: {
-          'focus': VFocus
-        }
+          focus: VFocus,
+        },
       },
     });
-    expect(form.find('.form__textarea').exists()).toBe(true);
+    expect(form.find(".form__textarea").exists()).toBe(true);
 
-    await form.find('.form__btn').trigger('click')
-    expect(form.find('.form__error').exists()).toBe(true);
-    
-    const textarea = mount(MyTextarea)
-    const textareaInput = textarea.find<HTMLTextAreaElement>('textarea')
-    const mockInvalidJSONString = '{[]}'
-    
-    await textareaInput.setValue(mockInvalidJSONString)
-    await form.find('.form__btn').trigger('click')
-    expect(form.find('.form__error').exists()).toBe(true);
-  })
+    await form.find(".form__btn").trigger("click");
+    expect(form.find(".form__error").exists()).toBe(true);
+
+    const textarea = mount(MyTextarea);
+    const textareaInput = textarea.find<HTMLTextAreaElement>("textarea");
+    const mockInvalidJSONString = "{[]}";
+
+    await textareaInput.setValue(mockInvalidJSONString);
+    await form.find(".form__btn").trigger("click");
+    expect(form.find(".form__error").exists()).toBe(true);
+  });
 });

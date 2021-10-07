@@ -36,14 +36,13 @@ describe("App.vue", () => {
 
     expect(wrapper.findComponent(App).exists()).toBe(true);
     expect(wrapper.html()).toContain("VisualiJSON App");
-    
+
     const linkHome = wrapper.find("[data-test='route-home']");
     expect(linkHome.exists()).toBe(true);
-    
+
     await linkHome.trigger("click");
     await flushPromises();
     expect(wrapper.html()).toContain("VisualiJSON App");
-    
 
     const buttonStringpaste = wrapper.find(
       ".menu__btn[data-test='route-stringpaste']"
