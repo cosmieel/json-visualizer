@@ -44,7 +44,7 @@ describe("InputPage.vue", () => {
 
     const input = mount(MyInput);
     const inputField = input.find<HTMLInputElement>("input");
-    const mockURLString = "https://jsonplaceholder.typicode.com/users?_limit=1";
+    const mockURLString = "https://jsonplaceholder.typicode.com/users";
 
     await inputField.setValue(mockURLString);
     expect(inputField.element.value).toBe(mockURLString);
@@ -63,11 +63,17 @@ describe("InputPage.vue", () => {
 
     const input = mount(MyInput);
     const inputField = input.find<HTMLInputElement>("input");
-    const mockInvalidURLString = "asdgasd";
+    const mockInvalidURLString_1 = "";
+    const mockInvalidURLString_2 = "https:";
 
-    await inputField.setValue(mockInvalidURLString);
+    await inputField.setValue(mockInvalidURLString_1);
     await form.find(".form__btn").trigger("click");
-    await store.methodsUrl.visualizeJson().catch((e) => console.log(e));
+    await flushPromises();
+
+    expect(form.find(".form__error").exists()).toBe(true);
+
+    await inputField.setValue(mockInvalidURLString_2);
+    await form.find(".form__btn").trigger("click");
     await flushPromises();
 
     expect(form.find(".form__error").exists()).toBe(true);

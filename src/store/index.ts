@@ -41,7 +41,8 @@ const stateUrl = reactive({
 const methodsUrl = {
   visualizeJson: async (): Promise<void> => {
     try {
-      const response = await axios.get(stateUrl.inputText);
+      const { href } = new URL(stateUrl.inputText);
+      const response = await axios.get(href);
       stateUrl.jsonOutput = response.data[0];
 
       localStorage.inputUrl = stateUrl.inputText;
