@@ -1,6 +1,6 @@
 # VisualiJSON
 
-#### _App page [VisualiJSON](https://visualijson-app.web.app/)_
+#### _App page: [VisualiJSON](https://visualijson-app.web.app/)_
 
 Single page application for creating a tree from JavaScript Object Notation (JSON) format.
 
