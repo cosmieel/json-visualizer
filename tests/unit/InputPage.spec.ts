@@ -57,7 +57,6 @@ describe("InputPage.vue", () => {
   });
 
   it("renders error", async () => {
-    const spy = jest.spyOn(store.methodsUrl, "visualizeJson");
     const form = formMountFactory();
     expect(form.find(".form__input").exists()).toBe(true);
 
@@ -77,7 +76,5 @@ describe("InputPage.vue", () => {
     await flushPromises();
 
     expect(form.find(".form__error").exists()).toBe(true);
-
-    spy.mockRestore();
   });
 });
