@@ -1,8 +1,8 @@
 # VisualiJSON
 
-## Single page application for creating a tree from JavaScript Object Notation (JSON) format.
+#### _App page [VisualiJSON](https://visualijson-app.web.app/)_
 
-## App page [VisualiJSON](https://visualijson-app.web.app/)
+Single page application for creating a tree from JavaScript Object Notation (JSON) format.
 
 #### Project setup
 
