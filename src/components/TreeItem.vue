@@ -1,6 +1,8 @@
 <template>
   <li class="node" v-for="(value, key) in node" :key="key">
-    <div class="node__key">{{ key ? key : "'empty'" }}</div>
+    <div class="node__key" :class="{ '_is-alone': isObject(value) }">
+      {{ String(key) ? String(key) : "'empty'" }}
+    </div>
     <div v-if="!isObject(value)" class="node__value">
       <span class="node__value-text">
         {{ String(value) ? String(value) : "'empty'" }}
@@ -48,10 +50,10 @@ export default defineComponent({
     content: "";
     position: absolute;
     z-index: -1;
-    left: 30px;
+    left: 23.5px;
     top: 0;
-    background: #000;
-    width: 2px;
+    background: #00a69a;
+    width: 3px;
     height: calc(100% + 20px);
   }
 
@@ -71,10 +73,10 @@ export default defineComponent({
       content: "";
       position: absolute;
       right: 100%;
-      top: 29px;
-      height: 2px;
+      top: 28px;
+      height: 3px;
       width: 20px;
-      background: #000;
+      background: #00a69a;
       z-index: 1;
     }
   }
@@ -89,6 +91,10 @@ export default defineComponent({
     display: inline-flex;
     justify-content: center;
     align-items: center;
+
+    &._is-alone {
+      border-radius: 5px;
+    }
   }
   &__value {
     padding: 0px 0px 0px 20px;

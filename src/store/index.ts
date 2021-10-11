@@ -11,9 +11,16 @@ const stateTextarea = reactive({
 });
 
 const methodsTextarea = {
+  parseJson: async (input: string): Promise<Record<string, unknown>> => {
+    return Array.isArray(JSON.parse(input)) && JSON.parse(input).length === 1
+      ? JSON.parse(String(input))[0]
+      : JSON.parse(String(input));
+  },
   visualizeJson: async (): Promise<void> => {
     try {
-      stateTextarea.jsonOutput = await JSON.parse(stateTextarea.inputText)[0];
+      stateTextarea.jsonOutput = await methodsTextarea.parseJson(
+        stateTextarea.inputText
+      );
 
       localStorage.inputText = stateTextarea.inputText;
       stateTextarea.errorMessage = "";
@@ -25,9 +32,9 @@ const methodsTextarea = {
   onMountedVisualize: async (): Promise<void> => {
     if (localStorage.inputText) {
       stateTextarea.inputText = await localStorage.inputText;
-      stateTextarea.jsonOutput = await JSON.parse(
-        String(localStorage.inputText)
-      )[0];
+      stateTextarea.jsonOutput = await methodsTextarea.parseJson(
+        stateTextarea.inputText
+      );
     }
   },
 };
@@ -39,11 +46,14 @@ const stateUrl = reactive({
 });
 
 const methodsUrl = {
+  getData: (data: Record<string, unknown>): Record<string, unknown> => {
+    return Array.isArray(data) && data.length === 1 ? data[0] : data;
+  },
   visualizeJson: async (): Promise<void> => {
     try {
       const { href } = new URL(stateUrl.inputText);
       const response = await axios.get(href);
-      stateUrl.jsonOutput = response.data[0];
+      stateUrl.jsonOutput = methodsUrl.getData(response.data);
 
       localStorage.inputUrl = stateUrl.inputText;
       localStorage.jsonUrlOutput = JSON.stringify(stateUrl.jsonOutput);
