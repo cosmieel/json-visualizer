@@ -1,7 +1,7 @@
 <template>
   <li class="node" v-for="(value, key) in node" :key="key">
     <div class="node__key" :class="{ '_is-alone': isObject(value) }">
-      {{ String(key) ? String(key) : "'empty'" }}
+      <span>{{ String(key) ? String(key) : "'empty'" }}</span>
     </div>
     <div v-if="!isObject(value)" class="node__value">
       <span class="node__value-text">
@@ -90,10 +90,16 @@ export default defineComponent({
     box-sizing: border-box;
     display: inline-flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    position: relative;
 
     &._is-alone {
       border-radius: 5px;
+    }
+
+    span {
+      position: sticky;
+      top: 20px;
     }
   }
   &__value {
