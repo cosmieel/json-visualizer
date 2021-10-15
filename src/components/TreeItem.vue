@@ -29,7 +29,7 @@ export default defineComponent({
   },
   methods: {
     isObject(obj: Record<string, unknown>): boolean {
-      return typeof obj === "object";
+      return typeof obj === "object" && obj !== null;
     },
   },
 });
@@ -117,6 +117,7 @@ export default defineComponent({
 
   &__value-text {
     padding: 20px 0;
+    word-break: break-all;
   }
   &__value-type {
     background: #505386;
