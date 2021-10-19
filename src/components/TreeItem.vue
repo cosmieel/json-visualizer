@@ -1,11 +1,11 @@
 <template>
   <li class="node" v-for="(value, key) in node" :key="key">
     <div class="node__key" :class="{ '_is-alone': isObject(value) }">
-      <span>{{ String(key) ? String(key) : "'empty'" }}</span>
+      <span>{{ isExists(key) }}</span>
     </div>
     <div v-if="!isObject(value)" class="node__value">
       <span class="node__value-text">
-        {{ String(value) ? String(value) : "'empty'" }}
+        {{ isExists(value) }}
       </span>
       <span class="node__value-type">{{ typeof value }}</span>
     </div>
@@ -30,6 +30,9 @@ export default defineComponent({
   methods: {
     isObject(obj: Record<string, unknown>): boolean {
       return typeof obj === "object" && obj !== null;
+    },
+    isExists(val: string): string {
+      return String(val) ? String(val) : "'empty'";
     },
   },
 });

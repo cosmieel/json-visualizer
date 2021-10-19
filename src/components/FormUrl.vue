@@ -5,6 +5,7 @@
       v-model="inputUrl"
       class="form__input"
       placeholder="Paste link"
+      @keyup.enter="visualize"
     />
     <my-error-msg v-if="errorMessage" class="form__error">
       {{ errorMessage }}
